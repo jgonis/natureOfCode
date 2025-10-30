@@ -1,0 +1,28 @@
+{
+  "name": "p5-vite-app",
+  "version": "1.0.0",
+  "description": "A web project using p5.js and Vite for drawing simulations.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:run": "vitest run"
+  },
+  "dependencies": {
+    "p5": "^1.11.1"
+  },
+  "devDependencies": {
+    "@types/p5": "^1.7.6",
+    "@vitest/ui": "^4.0.4",
+    "jsdom": "^27.0.1",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.10",
+    "vitest": "^4.0.4"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
