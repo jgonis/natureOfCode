@@ -25,7 +25,7 @@ export class RandomWalkerSketch {
 
         p.draw = () => {
             if (!this.isPaused) {
-                this.walker.step();
+                this.walker.step(p.mouseX, p.mouseY);
                 p.stroke(0);
                 p.point(this.walker.getX(), this.walker.getY());
             }
@@ -66,21 +66,30 @@ class Walker {
         this.canvasHeight = canvasHeight;
     }
 
-    public step(): void {
-        const choice = Math.floor(Math.random() * 4);
-        switch (choice) {
-            case 0:
-                this.x = Math.max(this.x - this.stepSize, 0);
-                break;
-            case 1:
-                this.y = Math.max(this.y - this.stepSize, 0);
-                break;
-            case 2:
-                this.x = Math.min(this.x + this.stepSize, this.canvasWidth - 1);
-                break;
-            case 3:
-                this.y = Math.min(this.y + this.stepSize, this.canvasHeight - 1);
-                break;
+    public step(mouseX: number, mouseY: number): void {
+        const followMouse = Math.random();
+        if (followMouse < 0.5) {
+            const length = Math.sqrt((mouseX - this.x) ** 2 + (mouseY - this.y) ** 2);
+            const xOffset = (mouseX - this.x) / length;
+            const yOffset = (mouseY - this.y) / length;
+            this.x = Math.round(this.x + xOffset);
+            this.y = Math.round(this.y + yOffset);
+        } else {
+            const choice = Math.floor(Math.random() * 4);
+            switch (choice) {
+                case 0:
+                    this.x = Math.max(this.x - this.stepSize, 0);
+                    break;
+                case 1:
+                    this.y = Math.max(this.y - this.stepSize, 0);
+                    break;
+                case 2:
+                    this.x = Math.min(this.x + this.stepSize, this.canvasWidth - 1);
+                    break;
+                case 3:
+                    this.y = Math.min(this.y + this.stepSize, this.canvasHeight - 1);
+                    break;
+            }
         }
     }
 
